@@ -5,10 +5,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import { Auth0Provider } from "@auth0/auth0-react";
-
+import { GithubProvider } from "./context/context";
 ReactDOM.render(
   <React.StrictMode>
-    <App></App>
+    <GithubProvider>
+      <App></App>
+    </GithubProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
