@@ -9,7 +9,7 @@ import {
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Switch>
         <Route to="/">
           <Dashboard></Dashboard>
@@ -18,7 +18,7 @@ function App() {
           <Login></Login>
         </Route>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 
