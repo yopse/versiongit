@@ -1,21 +1,20 @@
 import React from "react";
 import { Dashboard, Login, PrivateRoute, AuthWrapper, Error } from "./pages";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route to="/">
-          <Dashboard></Dashboard>
+        <Route path="/" exact>
+          <Dashboard />
         </Route>
-        <Route to="/login">
-          <Login></Login>
+
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="*">
+          <Error></Error>
         </Route>
       </Switch>
     </Router>
