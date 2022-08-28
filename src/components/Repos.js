@@ -4,7 +4,27 @@ import styled from "styled-components";
 import { GithubContext } from "../context/context";
 import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from "./Charts";
 const Repos = () => {
-  return <h2>Repos</h2>;
+  const chartData = [
+    {
+      label: "HTML",
+      value: "12",
+    },
+    {
+      label: "CSS",
+      value: "34",
+    },
+    {
+      label: "Javascript",
+      value: "50",
+    },
+  ];
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        <Pie3D data={chartData}></Pie3D>
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`
