@@ -7,10 +7,47 @@ import { MdBusiness, MdLocationOn, MdLink } from "react-icons/md";
 // Location
 
 const Card = () => {
+  const { githubUser } = useContext(GithubContext);
 
-    return (<h1>Card</h1>)
+  const {
+    avatar_url,
+    name,
+    twitter_username,
+    html_url,
+    company,
+    blog,
+    location,
+    bio,
+  } = githubUser;
 
-}
+  return (
+    <Wrapper>
+      <header>
+        <img src={avatar_url} alt={name} />
+        <div>
+          <h4>{name}</h4>
+          <p>@{twitter_username || "James"}</p>
+        </div>
+        <a href={`${html_url}`}>follow</a>
+      </header>
+      <p className="bio">{bio}</p>
+      <div className="links">
+        <p>
+          <MdBusiness></MdBusiness>
+          {company}
+        </p>
+        <p>
+          <MdLocationOn></MdLocationOn>
+          {location || "Pacific"}
+        </p>
+
+        <a href={`https://${blog}`}>
+          <MdLink></MdLink> {blog}
+        </a>
+      </div>
+    </Wrapper>
+  );
+};
 const Wrapper = styled.article`
   background: var(--clr-white);
   padding: 1.5rem 2rem;
