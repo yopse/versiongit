@@ -6,15 +6,13 @@ import { GithubContext } from "../context/context";
 const Dashboard = () => {
   const s = useContext(GithubContext);
 
-  console.log(s);
-
   return (
     <main>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar>
+      <Search></Search> */}
       <Info></Info>
-      <Repos></Repos>
       <User></User>
-      <Search></Search>
+      <Repos></Repos>
     </main>
   );
 };
