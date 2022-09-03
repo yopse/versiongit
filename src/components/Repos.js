@@ -84,6 +84,7 @@ const Repos = () => {
   );
 
   let mostStars = Object.values(stars).slice(-5).reverse();
+  let mostForks = Object.values(forks).slice(-5).reverse();
 
   return (
     <section className="section">
@@ -91,7 +92,7 @@ const Repos = () => {
         <Pie3D data={mostUsed}></Pie3D>
         <Column3D data={mostStars}></Column3D>
         <Doughnut2D data={mostPopular}></Doughnut2D>
-        <Bar3D></Bar3D>
+        <Bar3D data={mostForks}></Bar3D>
       </Wrapper>
     </section>
   );
