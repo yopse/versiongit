@@ -18,10 +18,41 @@ const Repos = () => {
       value: "50",
     },
   ];
+
+  const { repos } = useContext(GithubContext);
+
+  let languages = repos.reduce((total, item) => {
+    const { language } = item;
+
+    // console.log(language);
+
+    if (!language) return total;
+
+    if (!total[language]) {
+      total[language] = {
+        label: language,
+        value: 1,
+      };
+    } else {
+      total[language] = {
+        ...total[language],
+        value: total[language].value + 1,
+      };
+    }
+
+    return total;
+  }, {});
+
+  let mostUsed = Object.values(languages)
+    .sort((a, b) => {
+      return b.value - a.value;
+    })
+    .slice(0, 5);
+
   return (
     <section className="section">
       <Wrapper className="section-center">
-        <Pie3D data={chartData}></Pie3D>
+        <Pie3D data={mostUsed}></Pie3D>
       </Wrapper>
     </section>
   );
@@ -41,6 +72,7 @@ const Wrapper = styled.div`
 
   div {
     width: 100% !important;
+    border: 2px solid pink;
   }
   .fusioncharts-container {
     width: 100% !important;

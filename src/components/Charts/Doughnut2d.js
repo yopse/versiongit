@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Doughnut2d = () => {
-  return <div>chart</div>;
+  return <div>Doughnut2d</div>;
 };
 
 export default Doughnut2d;

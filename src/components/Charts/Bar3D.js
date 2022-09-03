@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Bar3D = () => {
-  return <div>chart</div>;
+  return <div>Bar3D</div>;
 };
 
 export default Bar3D;
