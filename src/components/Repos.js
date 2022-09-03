@@ -61,13 +61,37 @@ const Repos = () => {
     })
     .slice(0, 5);
 
+  let { stars, forks } = repos.reduce(
+    (total, items) => {
+      let { stargazers_count, name, forks } = items;
+
+      total.stars[stargazers_count] = {
+        label: name,
+        value: stargazers_count,
+      };
+
+      total.forks[stargazers_count] = {
+        label: name,
+        value: forks,
+      };
+      return total;
+    },
+    {
+      stars: {},
+
+      forks: {},
+    }
+  );
+
+  let mostStars = Object.values(stars).slice(-5).reverse();
+
   return (
     <section className="section">
       <Wrapper className="section-center">
         <Pie3D data={mostUsed}></Pie3D>
-        <Bar3D></Bar3D>
+        <Column3D data={mostStars}></Column3D>
         <Doughnut2D data={mostPopular}></Doughnut2D>
-        <Column3D></Column3D>
+        <Bar3D></Bar3D>
       </Wrapper>
     </section>
   );

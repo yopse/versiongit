@@ -23,7 +23,7 @@ ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
 // STEP 4 - Creating the DOM element to pass the react-fusioncharts componerat
 
-const ExampleChart = ({ data }) => {
+const Doughnut2d = ({ data }) => {
   const chartConfigs = {
     type: "doughnut2d", // The chart type
     width: "100%", // Width of the chart
@@ -50,4 +50,4 @@ const ExampleChart = ({ data }) => {
   return <ReactFC {...chartConfigs} />;
 };
 
-export default ExampleChart;
+export default Doughnut2d;
