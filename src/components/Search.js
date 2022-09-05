@@ -6,15 +6,15 @@ import { useState } from "react";
 import { useContext } from "react";
 
 const Search = () => {
-  const [user, setUser] = useState("");
+  const { requests, isLoading, searchGithubUser, error } =
+    useContext(GithubContext);
 
-  const { requests, error, searchGithubUser } = useContext(GithubContext);
+  const [user, setUser] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
+
     if (user) {
-      //more logic coming up soon
       searchGithubUser(user);
     }
   };
@@ -32,15 +32,16 @@ const Search = () => {
             <MdSearch></MdSearch>
             <input
               type="text"
-              placeholder="enter github username"
+              placeholder="Enter Github Username"
               value={user}
               onChange={(e) => setUser(e.target.value)}
             />
-
-            {requests > 0 && <button type="submit">Search</button>}
+            {requests > 0 && !isLoading && (
+              <button type="submit">Search</button>
+            )}
           </div>
         </form>
-        <h3>requests: {requests} / 60</h3>
+        <h3> Requests: {requests}/ 60</h3>
       </Wrapper>
     </section>
   );

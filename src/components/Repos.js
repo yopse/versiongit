@@ -112,7 +112,6 @@ const Wrapper = styled.div`
 
   div {
     width: 100% !important;
-    border: 2px solid pink;
   }
   .fusioncharts-container {
     width: 100% !important;

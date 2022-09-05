@@ -13,28 +13,16 @@ export const GithubProvider = ({ children }) => {
   const [repos, setRepos] = useState(mockRepos);
   const [followers, setFollowers] = useState(mockFollowers);
 
-  //Request & Loading
-
+  //Requests & Loading
   const [requests, setRequests] = useState(0);
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  //error
+  // Error
 
   const [error, setError] = useState({
     show: false,
     msg: "",
   });
-
-  const searchGithubUser = async (user) => {
-    const response = await axios(`${rootUrl}/users/${user}`).catch((err) =>
-      console.log(err)
-    );
-    if (response) {
-      setGitHubUser(response.data);
-    } else {
-      toggleError(true, "there is no user with that username");
-    }
-  };
 
   const checkRequests = () => {
     axios(`${rootUrl}/rate_limit`)
@@ -45,24 +33,56 @@ export const GithubProvider = ({ children }) => {
 
         setRequests(remaining);
         if (remaining === 0) {
-          //throw an error
-          toggleError(
-            true,
-            "sorry, you have exceeded your hourly rate limit !"
-          );
+          toggleError(true, "sorry you have ran out of the requests");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((error) => console.log(error));
   };
 
-  function toggleError(show = false, msg = "") {
+  //Toggle error
+
+  const toggleError = (show = false, msg = "") => {
     setError({
       show,
       msg,
     });
-  }
+  };
+
+  // searchUser
+
+  const searchGithubUser = async (user) => {
+    toggleError();
+    setIsLoading(true);
+
+    const response = await axios(`${rootUrl}/users/${user}`).catch((error) =>
+      console.log(error)
+    );
+
+    if (response) {
+      setGitHubUser(response.data);
+
+      const { login, followers_url } = response.data;
+
+      const repos = await axios(`${rootUrl}/users/${user}/repos?per_page=100`);
+
+      setRepos(repos.data);
+
+      const followers = await axios(`${rootUrl}/users/${user}/followers`);
+
+      setFollowers(followers.data);
+    } else {
+      toggleError(true, "sorry we couldn't find a user with this username");
+    }
+
+    setIsLoading(false);
+    checkRequests();
+  };
 
   useEffect(checkRequests, []);
+
+  useEffect(() => {
+    setTimeout(toggleError, 5000);
+  }, [error.show]);
 
   return (
     <GithubContext.Provider
@@ -70,9 +90,11 @@ export const GithubProvider = ({ children }) => {
         githubUser,
         repos,
         followers,
+        isLoading,
         requests,
-        error,
+
         searchGithubUser,
+        error,
       }}
     >
       {children}

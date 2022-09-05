@@ -4,8 +4,17 @@ import loadingImage from "../images/preloader.gif";
 import { GithubContext } from "../context/context";
 
 const Dashboard = () => {
-  const s = useContext(GithubContext);
+  const { isLoading } = useContext(GithubContext);
 
+  if (isLoading) {
+    return (
+      <main>
+        <Navbar></Navbar>
+        <Search></Search>
+        <img src={loadingImage} alt="uios" className="loading-img" />
+      </main>
+    );
+  }
   return (
     <main>
       <Navbar></Navbar>
