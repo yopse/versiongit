@@ -63,13 +63,13 @@ export const GithubProvider = ({ children }) => {
 
       const { login, followers_url } = response.data;
 
-      const repos = await axios(`${rootUrl}/users/${user}/repos?per_page=100`);
+      axios(`${rootUrl}/users/${user}/repos?per_page=100`).then((repos) => {
+        setRepos(repos.data);
+      });
 
-      setRepos(repos.data);
-
-      const followers = await axios(`${rootUrl}/users/${user}/followers`);
-
-      setFollowers(followers.data);
+      axios(`${rootUrl}/users/${user}/followers`).then((followers) => {
+        setFollowers(followers.data);
+      });
     } else {
       toggleError(true, "sorry we couldn't find a user with this username");
     }
