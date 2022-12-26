@@ -30,7 +30,7 @@ Clone the project
 
 ```bash
   git clone https://github.com/rajatetc/github-users.git
-```
+```=
 
 Go to the project directory
 
