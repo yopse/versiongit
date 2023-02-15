@@ -62,4 +62,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
+Demo Credentials -> Email : ademo@gmail.com Password : ademoA@12
+
 [MIT](https://choosealicense.com/licenses/mit/)
